@@ -12,9 +12,21 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  Item,
+  ItemContent,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 import { tools } from "@/data/tools";
 import type { Tool } from "@/types/tool";
-import { Wrench } from "lucide-react";
+import { Check, Wrench } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -25,6 +37,8 @@ type Props = {
   }>;
 };
 
+const VISIBLE_FEATURE_COUNT = 5;
+
 const ToolPage = async ({ params }: Props) => {
   const { tool: slug } = await params;
 
@@ -33,6 +47,9 @@ const ToolPage = async ({ params }: Props) => {
   if (!tool) {
     notFound();
   }
+
+  const visibleFeatures = tool.features?.slice(0, VISIBLE_FEATURE_COUNT) ?? [];
+  const hiddenFeatures = tool.features?.slice(VISIBLE_FEATURE_COUNT) ?? [];
 
   return (
     <main className="w-full px-4 py-8 sm:px-6 lg:px-8">
@@ -139,16 +156,46 @@ const ToolPage = async ({ params }: Props) => {
         {tool.features && tool.features.length > 0 ? (
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold tracking-normal">Features</h2>
-            <ul className="grid gap-2 sm:grid-cols-2">
-              {tool.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="rounded-md border bg-card px-3 py-2 text-sm text-card-foreground"
-                >
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <Collapsible className="space-y-3">
+              <ItemGroup className="gap-2">
+                {visibleFeatures.map((feature) => (
+                  <Item key={feature} variant="outline">
+                    <ItemMedia variant="icon" className="text-muted-foreground">
+                      <Check className="size-4" />
+                    </ItemMedia>
+                    <ItemContent>
+                      <ItemTitle>{feature}</ItemTitle>
+                    </ItemContent>
+                  </Item>
+                ))}
+              </ItemGroup>
+
+              {hiddenFeatures.length > 0 ? (
+                <>
+                  <CollapsibleContent>
+                    <ItemGroup className="gap-2 pt-2">
+                      {hiddenFeatures.map((feature) => (
+                        <Item key={feature} variant="outline">
+                          <ItemMedia
+                            variant="icon"
+                            className="text-muted-foreground"
+                          >
+                            <Check className="size-4" />
+                          </ItemMedia>
+                          <ItemContent>
+                            <ItemTitle>{feature}</ItemTitle>
+                          </ItemContent>
+                        </Item>
+                      ))}
+                    </ItemGroup>
+                  </CollapsibleContent>
+
+                  <CollapsibleTrigger className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+                    Show {hiddenFeatures.length} more features
+                  </CollapsibleTrigger>
+                </>
+              ) : null}
+            </Collapsible>
           </section>
         ) : null}
       </article>
