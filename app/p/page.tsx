@@ -1,14 +1,7 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import ToolCard from "@/components/tools/tool-card";
+import ToolBreadcrumb from "@/components/tools/tool-breadcrumb";
 import { tools } from "@/data/tools";
 import type { ToolListItem } from "@/types/tool";
-import Link from "next/link";
 
 const toolList: ToolListItem[] = Object.values(tools).map(
   ({ slug, name, summary, icon, languages }) => ({
@@ -24,19 +17,12 @@ const ToolsPage = () => {
   return (
     <main className="w-full px-4 py-8 sm:px-6 lg:px-8">
       <section className="mx-auto w-full max-w-5xl space-y-8">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <Link href="/" className="transition-colors hover:text-foreground">
-                Home
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Tools</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <ToolBreadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Tools" },
+          ]}
+        />
 
         <div className="space-y-3">
           <p className="text-sm font-medium uppercase text-muted-foreground">

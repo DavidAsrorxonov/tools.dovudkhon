@@ -1,17 +1,10 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import ToolBreadcrumb from "@/components/tools/tool-breadcrumb";
 import ToolFeatures from "@/components/tools/tool-features";
 import ToolScreenshotsCarousel from "@/components/tools/tool-screenshots-carousel";
 import { tools } from "@/data/tools";
 import type { Tool } from "@/types/tool";
 import { Wrench } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -32,31 +25,13 @@ const ToolPage = async ({ params }: Props) => {
   return (
     <main className="w-full px-4 py-8 sm:px-6 lg:px-8">
       <article className="mx-auto w-full max-w-5xl space-y-10">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <Link
-                href="/"
-                className="transition-colors hover:text-foreground"
-              >
-                Home
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <Link
-                href="/p"
-                className="transition-colors hover:text-foreground"
-              >
-                Tools
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{tool.name}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <ToolBreadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/p" },
+            { label: tool.name },
+          ]}
+        />
 
         <section className="space-y-6">
           <div className="flex items-start gap-5">
