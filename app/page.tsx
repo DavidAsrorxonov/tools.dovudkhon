@@ -22,7 +22,7 @@ export default function Home() {
 
         <div className="flex flex-col justify-center gap-3 sm:flex-row">
           <Link
-            href="/tools"
+            href="/p"
             className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}
           >
             See tools
