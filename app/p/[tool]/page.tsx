@@ -1,3 +1,4 @@
+import LanguageChip from "@/components/helper/language-chip";
 import ToolBreadcrumb from "@/components/tools/tool-breadcrumb";
 import ToolFeatures from "@/components/tools/tool-features";
 import ToolScreenshotsCarousel from "@/components/tools/tool-screenshots-carousel";
@@ -74,7 +75,7 @@ const ToolPage = async ({ params }: Props) => {
             </p>
 
             <div className="flex flex-wrap gap-2">
-              {[...tool.languages, ...tool.categories].map((item) => (
+              {tool.categories.map((item) => (
                 <span
                   key={item}
                   className="rounded-md bg-secondary px-2.5 py-1 text-xs text-secondary-foreground"
@@ -82,6 +83,12 @@ const ToolPage = async ({ params }: Props) => {
                   {item}
                 </span>
               ))}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {tool.languages.map((language) => {
+                return <LanguageChip key={language} language={language} />;
+              })}
             </div>
           </div>
 

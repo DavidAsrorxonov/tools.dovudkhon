@@ -1,8 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { languageColors } from "@/constants/linguist";
 import type { ToolListItem } from "@/types/tool";
 import { Wrench } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import LanguageChip from "../helper/language-chip";
 
 type ToolCardProps = {
   tool: ToolListItem;
@@ -37,14 +39,9 @@ const ToolCard = ({ tool }: ToolCardProps) => {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {tool.languages.map((language) => (
-                  <span
-                    key={language}
-                    className="rounded-md bg-secondary px-2 py-1 text-xs text-secondary-foreground"
-                  >
-                    {language}
-                  </span>
-                ))}
+                {tool.languages.map((language) => {
+                  return <LanguageChip key={language} language={language} />;
+                })}
               </div>
             </div>
           </div>

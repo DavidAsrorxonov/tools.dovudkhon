@@ -1,3 +1,5 @@
+import { LanguageName } from "./linguist";
+
 export type ToolLinks = {
   github?: string;
   npm?: string;
@@ -17,7 +19,7 @@ export type Tool = {
 
   links?: ToolLinks;
 
-  languages: readonly string[];
+  languages: readonly LanguageName[];
   categories: readonly string[];
 
   features?: readonly string[];
