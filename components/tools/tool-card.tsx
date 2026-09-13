@@ -26,6 +26,7 @@ const ToolCard = ({ tool }: ToolCardProps) => {
                   width={56}
                   height={56}
                   className="size-full object-cover"
+                  fetchPriority="high"
                 />
               ) : (
                 <Wrench className="size-5 sm:size-6" strokeWidth={1.5} />

@@ -19,6 +19,7 @@ const ToolOverview = ({ tool }: ToolOverviewProps) => {
               width={64}
               height={64}
               className="size-full object-cover"
+              fetchPriority="high"
             />
           ) : (
             <Wrench className="size-6 sm:size-7" strokeWidth={1.5} />

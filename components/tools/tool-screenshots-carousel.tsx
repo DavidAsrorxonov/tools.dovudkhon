@@ -41,7 +41,7 @@ const ToolScreenshotsCarousel = ({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="flex items-center justify-center gap-2 m-2">
+        <div className="flex sm:hidden items-center justify-center gap-2 m-2">
           <GalleryHorizontal className="size-6" strokeWidth={1.5} />
           Swipe to see more
         </div>
