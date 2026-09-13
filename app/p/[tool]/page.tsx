@@ -8,6 +8,7 @@ import { tools } from "@/data/tools";
 import { cn } from "@/lib/utils";
 import type { Tool } from "@/types/tool";
 import { FileText, Wrench } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -18,10 +19,51 @@ type Props = {
   }>;
 };
 
+const getTool = (slug: string): Tool | undefined =>
+  tools[slug as keyof typeof tools];
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const { tool: slug } = await params;
+  const tool = getTool(slug);
+
+  if (!tool) {
+    notFound();
+  }
+
+  const title = `${tool.name} | Dovudkhon Tools`;
+  const image = tool.screenshots?.[0] ?? tool.icon;
+
+  return {
+    title,
+    description: tool.summary,
+    openGraph: {
+      title,
+      description: tool.description,
+      type: "website",
+      images: image
+        ? [
+            {
+              url: image,
+              alt: `${tool.name} preview`,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: image ? "summary_large_image" : "summary",
+      title,
+      description: tool.summary,
+      images: image ? [image] : undefined,
+    },
+  };
+};
+
 const ToolPage = async ({ params }: Props) => {
   const { tool: slug } = await params;
 
-  const tool: Tool | undefined = tools[slug as keyof typeof tools];
+  const tool = getTool(slug);
 
   if (!tool) {
     notFound();
