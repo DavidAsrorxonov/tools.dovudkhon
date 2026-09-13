@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { languageColors } from "@/constants/linguist";
 import type { ToolListItem } from "@/types/tool";
 import { Wrench } from "lucide-react";
 import Image from "next/image";
