@@ -2,15 +2,23 @@ import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
 import ToolBreadcrumb from "@/components/tools/tool-breadcrumb";
+import { tools } from "@/data/tools";
+import type { Tool } from "@/types/tool";
 
 interface PageProps {
   params: Promise<{ tool: string }>;
 }
 
 export default async function PrivacyPage({ params }: PageProps) {
-  const { tool } = await params;
+  const { tool: slug } = await params;
 
-  const filePath = path.join(process.cwd(), "legal", tool, "privacy.html");
+  const tool: Tool | undefined = tools[slug as keyof typeof tools];
+
+  if (!tool) {
+    notFound();
+  }
+
+  const filePath = path.join(process.cwd(), "legal", tool.slug, "privacy.html");
 
   if (!fs.existsSync(filePath)) {
     notFound();
@@ -24,7 +32,7 @@ export default async function PrivacyPage({ params }: PageProps) {
         items={[
           { label: "Home", href: "/" },
           { label: "Tools", href: "/p" },
-          { label: tool, href: `/p/${tool}` },
+          { label: tool.name, href: `/p/${tool.slug}` },
           { label: "Privacy" },
         ]}
       />
