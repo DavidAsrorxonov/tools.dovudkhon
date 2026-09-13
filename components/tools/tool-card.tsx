@@ -11,11 +11,14 @@ type ToolCardProps = {
 
 const ToolCard = ({ tool }: ToolCardProps) => {
   return (
-    <Link href={`/p/${tool.slug}`} className="block">
-      <Card className="rounded-lg transition-colors hover:bg-accent/50">
+    <Link
+      href={`/p/${tool.slug}`}
+      className="block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+    >
+      <Card className="rounded-lg transition-colors [--card-spacing:--spacing(3)] hover:bg-accent/50 sm:[--card-spacing:--spacing(4)]">
         <CardContent>
-          <div className="flex items-start gap-4">
-            <div className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-secondary text-secondary-foreground">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+            <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-md bg-secondary text-secondary-foreground sm:size-14">
               {tool.icon ? (
                 <Image
                   src={tool.icon}
@@ -25,13 +28,15 @@ const ToolCard = ({ tool }: ToolCardProps) => {
                   className="size-full object-cover"
                 />
               ) : (
-                <Wrench className="size-6" strokeWidth={1.5} />
+                <Wrench className="size-5 sm:size-6" strokeWidth={1.5} />
               )}
             </div>
 
             <div className="min-w-0 space-y-2">
               <div className="space-y-1">
-                <h2 className="text-lg font-semibold">{tool.name}</h2>
+                <h2 className="text-base font-semibold sm:text-lg">
+                  {tool.name}
+                </h2>
                 <p className="text-sm leading-6 text-muted-foreground">
                   {tool.summary}
                 </p>

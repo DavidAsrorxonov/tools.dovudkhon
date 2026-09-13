@@ -1,5 +1,5 @@
-import ToolCard from "@/components/tools/tool-card";
 import ToolBreadcrumb from "@/components/tools/tool-breadcrumb";
+import ToolList from "@/components/tools/tool-list";
 import { tools } from "@/data/tools";
 import type { ToolListItem } from "@/types/tool";
 
@@ -15,8 +15,8 @@ const toolList: ToolListItem[] = Object.values(tools).map(
 
 const ToolsPage = () => {
   return (
-    <main className="w-full px-4 py-8 sm:px-6 lg:px-8">
-      <section className="mx-auto w-full max-w-5xl space-y-8">
+    <main className="w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <section className="mx-auto w-full max-w-5xl space-y-6 sm:space-y-8">
         <ToolBreadcrumb
           items={[
             { label: "Home", href: "/" },
@@ -28,7 +28,7 @@ const ToolsPage = () => {
           <p className="text-sm font-medium uppercase text-muted-foreground">
             Tools
           </p>
-          <h1 className="text-3xl font-bold tracking-normal text-foreground sm:text-4xl">
+          <h1 className="text-2xl font-bold tracking-normal text-foreground sm:text-4xl">
             Developer utilities
           </h1>
           <p className="max-w-2xl text-base leading-7 text-muted-foreground">
@@ -37,11 +37,7 @@ const ToolsPage = () => {
           </p>
         </div>
 
-        <div className="space-y-4">
-          {toolList.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} />
-          ))}
-        </div>
+        <ToolList tools={toolList} />
       </section>
     </main>
   );
