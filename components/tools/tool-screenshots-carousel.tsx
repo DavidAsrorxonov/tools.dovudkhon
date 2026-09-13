@@ -5,6 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { GalleryHorizontal } from "lucide-react";
 import Image from "next/image";
 
 type ToolScreenshotsCarouselProps = {
@@ -40,6 +41,10 @@ const ToolScreenshotsCarousel = ({
             </CarouselItem>
           ))}
         </CarouselContent>
+        <div className="flex items-center justify-center gap-2 m-2">
+          <GalleryHorizontal className="size-6" strokeWidth={1.5} />
+          Swipe to see more
+        </div>
         <CarouselPrevious className="left-2 sm:-left-10" />
         <CarouselNext className="right-2 sm:-right-10" />
       </Carousel>
